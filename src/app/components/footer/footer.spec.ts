@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SliderMoods } from './slider-moods';
+import { Footer } from './footer';
 
-describe('SliderMoods', () => {
-  let component: SliderMoods;
-  let fixture: ComponentFixture<SliderMoods>;
+describe('Footer', () => {
+  let component: Footer;
+  let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SliderMoods]
+      imports: [Footer]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SliderMoods);
+    fixture = TestBed.createComponent(Footer);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

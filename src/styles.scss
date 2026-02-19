@@ -1,2 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'swiper/css/bundle';
+@use 'app/variables' as *;
+
+
+body{
+    background-color: $bg;
+}
+
+@font-face {
+  font-family: 'FredokaOne';
+  src: url('/font/FredokaOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
