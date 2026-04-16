@@ -1,125 +1,129 @@
 <div class="blocMood">
     <div class="container px-3">
-        <h1 class="fs-1 py-3">Mood</h1>
-        <swiper-container slides-per-view="3" pagination="false" navigation="true" loop="true" autoplay-delay="3000"
-            class="carousel" [breakpoints]="breakpoints">
-            <swiper-slide>
-                <div>
-                    test 
-                </div>
-            
-                <div>
-                    test 2
-                </div>
-            
-                <div>
-                    test 3
-                </div>
-            
-                <div>
-                    test 4
-                </div>
-            </swiper-slide>
-        </swiper-container>
-
-        <div class="row py-1">
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
+        <h2 class="fs-1 pt-5 pb-3">Mood</h2>
     </div>
+    <swiper-container 
+    class="carousel"
+    slides-per-view="3"
+    loop="true"
+    pagination="true"
+    navigation="false"
+    pagination-clickable="true"
+    [breakpoints]="breakpoints"
+    >
+    @for (mood of moods(); track mood.id) {
+        <swiper-slide class="swiper-slide">
+        <div>
+            <a
+            [routerLink]="['/results', mood.slug]"
+            class="card Regular shadow"            
+            [class]="getMoodCardClass(mood)"
+            style="width: 18rem;"
+            >
+            <div class="mood-tooltip">{{ mood.description }}</div>
+            <div class="card-body text-center">
+            <img [src]="mood.imageUrl" class="card-img-top" [alt]="mood.label">
+
+                <span class="btn btn-primary rounded-pill btn-lg">
+                {{ mood.label }}
+                </span>
+            </div>
+            </a>
+        </div>
+        </swiper-slide>
+    }
+    </swiper-container>
+
+        
+    <!-- <swiper-container 
+
+    class="carousel"
+    slides-per-view="3"
+    loop="true"
+    pagination="true"
+    navigation="false"
+    pagination-clickable="true"
+    [breakpoints]="breakpoints"
+    >
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'cozy']" class="card Regular shadow cozy" style="width: 18rem;">
+                    <img src="/assets/images/cozy.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">                      
+                        <span class="btn btn-primary rounded-pill btn-lg">{{ moods.label}}</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'feel-good']" class="card Regular shadow feelGood" style="width: 18rem;">
+                    <img src="/assets/images/feelGood.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Feel Good</span>
+                    </div>
+                </a>
+                </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'wholesome']" class="card Regular shadow wholesome" style="width: 18rem;">
+                    <img src="/assets/images/wholesome.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Wholesome</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'emotional']" class="card Regular shadow emotional" style="width: 18rem;">
+                    <img src="/assets/images/emotional.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Emotional</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'dark']" class="card Regular shadow dark" style="width: 18rem;">
+                    <img src="/assets/images/dark.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Dark</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'epic']" class="card Regular shadow epic" style="width: 18rem;">
+                    <img src="/assets/images/epic.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Epic</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'relaxing']" class="card Regular shadow relaxing" style="width: 18rem;">
+                    <img src="/assets/images/relaxing.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Relaxing</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="swiper-slide">
+            <div>
+                <a [routerLink]="['/results', 'tense']" class="card Regular shadow tense" style="width: 18rem;">
+                    <img src="/assets/images/tense.png" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <span class="btn btn-primary rounded-pill btn-lg">Tense</span>
+                    </div>
+                </a>
+            </div>
+        </swiper-slide>
+    </swiper-container> -->
 </div>
-
-
-<swiper-container slides-per-view="3" pagination="false" navigation="true" loop="true" autoplay-delay="3000"
-    class="carousel" [breakpoints]="breakpoints">
-    <swiper-slide>
-        <div>
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Cozy</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-    <swiper-slide>
-        <div>
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Feel Good / Happy</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-    <swiper-slide>
-        <div>
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Romance</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-    <swiper-slide>
-        <div>
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Action</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-    <swiper-slide>
-        <div>
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Fantasy / Magical</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card’s content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-</swiper-container>

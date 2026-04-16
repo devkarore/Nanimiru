@@ -12,3 +12,58 @@ $textPolice: 'Poppins';
 $marronGlobal: #6b3f2a;
 $marronHover: #9e5e41;
 $bleuFonce:#1f2937;
+
+@mixin btn-cozy {
+    background-color: #fdb99c;
+    color: white;
+    border: none;
+    width: 70%;
+}
+@mixin cozy {
+    background-color: #fdb99c;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin feel-good {
+    background-color:#fec859;
+    color: white;
+    border: none;
+    width: 30%;
+}
+@mixin emotional {
+    background-color: #faadc0;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin epic {
+    background-color: #d4bce3;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin dark {
+    background-color: #fdd8a3;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin relaxing {
+    background-color: #fdd8a3;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin tense {
+    background-color: #fdd8a3;
+    color: white;
+    border: none;
+    width: 25%;
+}
+@mixin wholesome {
+    background-color: #fdd8a3;
+    color: white;
+    border: none;
+    width: 25%;
+}

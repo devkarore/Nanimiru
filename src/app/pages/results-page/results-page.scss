@@ -1,0 +1,10 @@
+@use '../../variables' as *;
+
+.blocResults {
+    background-color: $bg2;
+    padding: 3rem 0;
+    h2 {
+        color: $Purple;
+        font-family: 'FredokaOne', sans-serif;
+    }
+}

@@ -1,24 +1,37 @@
-import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, signal, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { AnimeApi } from '../../services/anime-api';
+import { RouterLink } from '@angular/router';
+import { MoodModel } from '../../models/animeModel';
+import { NgClass } from '@angular/common';
 
-interface moodModel {
-  id: number;
-  titre: string;
-  libelle_btn: string;
-}
 
 
 @Component({
   selector: 'app-mood',
-  imports: [],
+  imports: [RouterLink, NgClass],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './mood.html',
   styleUrl: './mood.scss',
 })
-listeMood = signal<moodModel[]>
 
-export class Mood {
+export class Mood implements OnInit {
+  moods = signal<MoodModel[]>([]);
 
-  breakpoints = {
+  constructor(private monApiService: AnimeApi) {}
+
+  ngOnInit(): void {
+    this.loadMoods();
+  }
+
+  loadMoods(): void {
+    this.monApiService.getMoods().subscribe({
+      next: (data) => {
+        this.moods.set(data.member);
+      },
+      error: (err) => console.error('Erreur chargement des moods', err)
+    });
+  }
+    breakpoints = {
     0: {
       slidesPerView: 1
     },
@@ -29,15 +42,7 @@ export class Mood {
       slidesPerView: 3
     }
   };
-
-  ListeEtudiant: EtudiantModel[] = [
-    {
-          id: 1, 
-  titre: Cosy
-  libelle_btn: string;
-        },
-
-  ];
-
+  getMoodCardClass(mood: MoodModel): string {
+    return `card Regular shadow ${mood.slug}`;
+  }
 }
-

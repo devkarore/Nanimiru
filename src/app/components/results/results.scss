@@ -1,0 +1,78 @@
+@use '../../variables' as *;
+
+.thumbnail {
+width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+    
+}
+
+.cozy{    
+    @include cozy;
+}
+.feel-good {
+    @include feel-good;
+
+}
+.emotional {
+    @include emotional;
+
+}
+.epic {
+    @include epic;
+
+}
+.dark {
+    @include dark;
+
+}
+.relaxing {
+    @include relaxing;
+
+}
+.tense {
+    @include tense;
+
+}
+.wholesome {
+    @include wholesome;
+
+}
+
+.card {
+    background-color: white;
+    border: 3px solid $Purple;
+    border-radius: 30px;
+    overflow: hidden;
+    
+    
+}
+
+
+// .rounded-circle {
+//     width: 40px;
+    
+// }
+
+.image-overlay {
+    height: 15%;
+    background-color: rgba(31, 41, 55, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+}
+
+.platform-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+}
+
+.blocResults {
+    background-color: $bg2;
+    padding: 3rem 0;
+    h2 {
+        color: $Purple;
+        font-family: 'FredokaOne', sans-serif;
+    }
+}

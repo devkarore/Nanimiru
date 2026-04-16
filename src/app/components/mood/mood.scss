@@ -5,31 +5,203 @@
     background-color: $bg2;
     
     
+    .carousel {
+        // background-color: violet;
+        
+        .swiper-slide{
+            padding-bottom: 40px;
+            // background-color: yellowgreen;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            
+            .card{
+                position: relative;
+                background-color: rgba(255, 255, 255, 0);
+                // border-color: $Purple;
+                border-style: solid;
+                border-width: 3px;
+                border-radius: 30px;  
+                margin-top: 5%;    
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+                }
+
+            .mood-tooltip {
+                /*
+                Cozy → "Ambiance douce et réconfortante"
+                Feel Good → "Anime joyeux et positif"
+                Wholesome → "Rempli de tendresse et de bienveillance"
+                Emotional → "Histoire touchante et émotive"
+                Dark → "Ambiance sombre et intense"
+                Epic → "Aventure grandiose et héroïque"
+                Relaxing → "Calme et apaisant"
+                Tense → "Suspense et tension"
+                */
+                position: absolute;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #fff;
+                color: #555;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+                // background: rgba(31, 41, 55, 0.459);
+                // color: white;
+                padding: 6px 10px;
+                border-radius: 8px;
+                font-size: 12px;
+
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease;
+                z-index: 2;
+                white-space: nowrap;
+                }
+
+            .card:hover .mood-tooltip {
+                opacity: 1;
+                }
+                
+            .cozy{
+                background-color: #fef2e3;
+                border-color: #fdb99c;
+                .btn{
+                    @include btn-cozy;
+                }
+            }
+            .feel-good{
+                background-color: #f8edc3;                
+                border-color: #fec859;
+                .btn{
+                    background-color:#fec859;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .wholesome{
+                // background-color: #fdedec;
+                background-color: #fdecef;
+                // border-color: #f9a8bd;
+                border-color: #f8a5b6;
+                .btn{
+                    // background-color: #faadc0;
+                    background-color: #f8a5b6;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .emotional{
+                background-color: #fff6e5;
+                border-color: #f7d794;
+                .btn{
+                    background-color: #f7d794;
+                    color: #5c4b3b;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .dark{
+                background-color: #f3effa;
+                border-color: #b8a4e3;
+                .btn{
+                    background-color: #8c7ae6;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .epic{
+                background-color: #f4eaff;
+                border-color: #c8a2ff;
+                .btn{
+                    background-color: #a66cff;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .relaxing{
+                background-color: #edf7fb;
+                border-color: #a8d8ea;
+                .btn{
+                    background-color: #7ec8e3;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            .tense{
+                background-color: #fff4e5;
+                border-color: #f5b971;
+                .btn{
+                    background-color: #f5a623;
+                    color: white;
+                    border: none;
+                    width: 70%;
+                    
+                }
+            }
+            // .action{
+            //     background-color: #f1dcf3;
+            //     border-color: #d4bce3;
+            //     .btn{
+            //         background-color: #d4bce3;
+            //         color: white;
+            //         border: none;
+            //         width: 70%;
+                    
+            //     }
+            // }
+            // .fantasy{
+            //     background-color: #f6ebf3;
+            //     border-color: #fdd8a3;
+            //     .btn{
+            //         background-color: #fdd8a3;
+            //         color: white;
+            //         border: none;
+            //         width: 70%;
+                    
+            //     }
+            // }
+        }
+    }  
+    
 
     .container{
+        margin-top: -1px;
         // padding-top: 10%;
         // padding-bottom: 5%;
         display: block;
         justify-items: center;
 
     
-        h1{
-            
+        h2{
             color: $Purple;
             font-family: 'FredokaOne', sans-serif;
             
         }
 
-        .card{
-            background-color: white;
-            border-color: $Purple;
-            border-style: solid;
-            border-width: 3px;
-            border-radius: 30px;
-
             
-        }
         
-
     }
 }
