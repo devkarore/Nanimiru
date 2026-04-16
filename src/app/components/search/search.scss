@@ -1,0 +1,37 @@
+@use '../../variables' as *;
+
+
+.blocSearch{    
+  background-image: url('/images/fontSearch.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: top center;
+  min-height: 76vh;
+    
+
+    .container{
+    padding-top: 90px; 
+    padding-bottom: 2rem;
+    display: block;
+    justify-items: center;
+
+    
+        h1{
+            
+            color: $Purple;
+            font-family: 'FredokaOne', sans-serif;
+            
+        }
+        
+        .search{
+            background: white;
+            border-radius: 15px;
+            border-style: solid;
+            border-color: $Purple;
+            width: 70%;
+            input{
+                border: none;
+            }
+        }
+    }
+}

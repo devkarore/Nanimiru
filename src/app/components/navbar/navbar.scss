@@ -3,14 +3,23 @@
 
 
 .navbar {
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     z-index: 5;
     width: 100%;
-    position: fixed;
-    background-color: rgba(30, 20, 20, 0.9);
+    position: sticky;
+    top: 0;
+
+    background-color: $bg2;
     font-family: $textPolice !important;
 
-    .navbar-brand{
+    .navbar-brand {
         font-family: 'FredokaOne', sans-serif;
-        color: $logo;
+        color: $Purple;
+    }
+
+    .nav-link {
+        color: $Purple !important;
     }
 }
