@@ -20,12 +20,12 @@ export class App {
   protected readonly title = signal('nanimiru');
   constructor(private animeAuth: AnimeAuth) {
 
-    // this.animeAuth.fetchJwtToken().subscribe({
-    //   next: () => {},
-    //   error: (err) => {
-    //     console.error('Impossible de récupérer le JWT:');
-    //     console.log(err);
-    //   }
-    // });
+    this.animeAuth.fetchJwtToken().subscribe({
+      next: () => {},
+      error: (err) => {
+        console.error('Impossible de récupérer le JWT:');
+        console.log(err);
+      }
+    });
   }
 }
