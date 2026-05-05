@@ -5,6 +5,7 @@ import { AnimeCollection } from '../models/animeModel';
 import { GenreCollection } from '../models/animeModel';
 import { MoodCollection } from '../models/animeModel';
 import { PlatformCollection } from '../models/animeModel';
+import { AnimeAuth } from './anime-auth';
 
 
 
@@ -14,24 +15,12 @@ import { PlatformCollection } from '../models/animeModel';
 })
 export class AnimeApi {
 
-  private baseUrl: string = "https://127.0.0.1:8000/api/";
-  // (api angular) private baseUrl: string = "http://api-nanimiru.loc:8080/";
-
-
-  constructor(private http: HttpClient) {}
-
-  // sendEmail(formValues: FormData) {
-  //   return this.http.post(`${this.baseUrl}ticketing.php`, formValues, { 
-  //     responseType: 'text' 
-  //   });
-  // }
+  private apiUrl: string = "https://127.0.0.1:8000/api/";
   
-  // getImageKitsu(title: string): string {
-  //   const urlImage = `https://kitsu.io/api/edge/anime?filter[text]=${title}`;
-  //   return urlImage;
-  // }
 
-  getAnimes(page: number = 1, animeIri?: string, genreIri?: string, moodIri?: string, platformIri?: string): Observable<AnimeCollection> {
+  constructor(private http: HttpClient, private monAuthService: AnimeAuth) {}
+
+    getAnimes(page: number = 1, animeIri?: string, genreIri?: string, moodIri?: string, platformIri?: string, search?: string): Observable<AnimeCollection> {
     let params = new HttpParams().set('page', page);
 
     if (animeIri) {
@@ -47,16 +36,19 @@ export class AnimeApi {
     if (platformIri) {
       params = params.set('platforms', platformIri);
     }
+    if (search) {
+      params = params.set('title', search);
+    }
 
-    return this.http.get<AnimeCollection>(`${this.baseUrl}animes`, { params });
+    return this.http.get<AnimeCollection>(`${this.apiUrl}animes`, { params });
   }
   getGenres(): Observable<GenreCollection> {
-    return this.http.get<GenreCollection>(`${this.baseUrl}genres`);
+    return this.http.get<GenreCollection>(`${this.apiUrl}genres`);
   }
   getMoods(): Observable<MoodCollection> {
-    return this.http.get<MoodCollection>(`${this.baseUrl}moods`);
+    return this.http.get<MoodCollection>(`${this.apiUrl}moods`);
   }
   getPlatforms(): Observable<PlatformCollection> {
-    return this.http.get<PlatformCollection>(`${this.baseUrl}platforms`);
+    return this.http.get<PlatformCollection>(`${this.apiUrl}platforms`);
   }
 }

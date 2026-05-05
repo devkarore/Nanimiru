@@ -30,22 +30,22 @@
                     @for (mood of anime.moods; track mood.id) {
                       <!-- <span>{{ mood.name }}</span> -->
                       @if (mood.slug === 'cozy') {
-                          <a [routerLink]="['/results', 'cozy']" class="cozy badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
+                          <a [routerLink]="['/results', 'cozy']" class="cozy badge text-bg m-1 text-decoration-none">{{ mood.slug }}</a>
                         }
                       @if (mood.slug === 'feel-good') {
-                          <a [routerLink]="['/results', 'feel-good']" class="feel-good badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
+                          <a [routerLink]="['/results', 'feel-good']" class="feel-good badge text-bg m-1 text-decoration-none">{{ mood.slug }}</a>
                         }
                       @if (mood.slug === 'emotional') {
                           <a [routerLink]="['/results', 'emotional']" class="emotional badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
                         }
                       @if (mood.slug === 'epic') {
-                          <a [routerLink]="['/results', 'epic']" class="epic badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
+                          <a [routerLink]="['/results', 'epic']" class="epic badge text-bg m-1 text-decoration-none">{{ mood.slug }}</a>
                         }
                       @if (mood.slug === 'dark') {
-                          <a [routerLink]="['/results', 'dark']" class="dark badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
+                          <a [routerLink]="['/results', 'dark']" class="dark badge text-bg m-1 text-decoration-none">{{ mood.slug }}</a>
                         }
                       @if (mood.slug === 'relaxing') {
-                          <a [routerLink]="['/results', 'relaxing']" class="relaxing badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>
+                          <a [routerLink]="['/results', 'relaxing']" class="relaxing badge text-bg m-1 text-decoration-none">{{ mood.slug }}</a>
                         }
                       @if (mood.slug === 'tense') {
                           <a [routerLink]="['/results', 'tense']" class="tense badge text-bg m-1 text-decoration-none">{{ mood.label }}</a>

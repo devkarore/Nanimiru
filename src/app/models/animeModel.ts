@@ -7,6 +7,8 @@ export interface AnimeModel {
     imageUrl: string;
     thumbnailUrl: string;    
     ageRating: number;   
+    type:string;
+    episode: number;
     genres: GenreModel[];
     moods: MoodModel[];
     platforms: PlatformModel[]; 

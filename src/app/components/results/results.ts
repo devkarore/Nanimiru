@@ -11,6 +11,8 @@ import { RouterLink, Router } from '@angular/router';
   styleUrl: './results.scss',
 })
 export class Results implements OnInit {
+
+    searchTerm: string = '';
   
     animes = signal<AnimeModel[]>([]);
     genres = signal<GenreModel[]>([]);
@@ -38,6 +40,12 @@ export class Results implements OnInit {
       this.loadMoodsForFilter(slug);
       this.loadGenres();
       this.loadPlatforms();
+
+      this.route.queryParamMap.subscribe(params => {
+      this.searchTerm = params.get('search') ?? '';
+      this.currentPage = 1;
+      this.loadAnimes();
+    });
     }
 
   /********************************************
@@ -89,9 +97,11 @@ export class Results implements OnInit {
     const moodIri = this.selectedMoodIri;
       
     this.isLoading.set(true);
-    this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri).subscribe({
+    this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri, undefined, this.searchTerm).subscribe({
       next: (data) => {
-        this.animes.set(data.member);
+        this.animes.set(data.member.filter(anime =>
+        anime.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      ));
         this.totalItems = data.totalItems;
         this.isLoading.set(false);
       },
@@ -100,6 +110,7 @@ export class Results implements OnInit {
         this.isLoading.set(false);
       }
     });
+    
   }
 
   loadMoodsForFilter(slug: string | null): void {

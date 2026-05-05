@@ -3,7 +3,9 @@
         <h1 class="fs-1">Nanimiru</h1>
         <div class="search shadow-sm px-2">
             <img src="icons/search_24dp_A286B7_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-            <input class="w-100" type="text" placeholder="Rechercher...">
+            <input 
+            class="w-100" type="text" placeholder="Rechercher un animé..." [(ngModel)]="searchTerm">
+            <button (click)="onSearch()">Rechercher</button>
         </div>
     </div>
 
