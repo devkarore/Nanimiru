@@ -3,35 +3,32 @@
         <h2 class="fs-1 pt-5 pb-3">Mood</h2>
     </div>
     <swiper-container 
-    class="carousel"
-    slides-per-view="3"
-    loop="true"
-    pagination="true"
-    navigation="false"
-    pagination-clickable="true"
-    [breakpoints]="breakpoints"
-    >
-    @for (mood of moods(); track mood.id) {
-        <swiper-slide class="swiper-slide">
-        <div>
-            <a
-            [routerLink]="['/results', mood.slug]"
-            class="card Regular shadow"            
-            [class]="getMoodCardClass(mood)"
-            style="width: 18rem;"
-            >
-            <div class="mood-tooltip">{{ mood.description }}</div>
-            <div class="card-body text-center">
-            <img [src]="mood.imageUrl" class="card-img-top" [alt]="mood.label">
-
-                <span class="btn btn-primary rounded-pill btn-lg">
-                {{ mood.label }}
-                </span>
-            </div>
-            </a>
-        </div>
-        </swiper-slide>
-    }
+        class="carousel"
+        slides-per-view="3"
+        loop="true"
+        pagination="true"
+        navigation="false"
+        pagination-clickable="true"
+        [breakpoints]="breakpoints">
+        @for (mood of moods(); track mood.id) {
+            <swiper-slide class="swiper-slide">
+                <div>
+                    <a
+                        [routerLink]="['/results', mood.slug]"
+                        class="card Regular shadow"            
+                        [class]="getMoodCardClass(mood)"
+                        style="width: 18rem;" >
+                        <div class="mood-tooltip">{{ mood.description }}</div>
+                        <div class="card-body text-center">
+                            <img [src]="mood.imageUrl" class="card-img-top" [alt]="mood.label">
+                            <span class="btn btn-primary rounded-pill btn-lg">
+                                {{ mood.label }}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </swiper-slide>
+        }
     </swiper-container>
 
         
