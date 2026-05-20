@@ -54,28 +54,28 @@
                 <div>
                   @for (genre of anime.genres; track genre.id) {
                   @if (genre.name === 'Fantasy') {
-                      <span href="#" class="badge text-bg-primary m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-primary m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Action') {
-                      <span href="#" class="badge text-bg-secondary m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-secondary m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Romance') {
-                      <span href="#" class="badge text-bg-success m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-success m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Slice of Life') {
-                      <span href="#" class="badge text-bg-danger m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-danger m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Comedy') {
-                      <span href="#" class="badge text-bg-warning m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-warning m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Adventure') {
-                      <span href="#" class="badge text-bg-info m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-info m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'Drama') {
-                      <span href="#" class="badge text-bg-light border border-black m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-light border border-black m-1">{{ genre.name }}</a>
                     }
                   @if (genre.name === 'School') {
-                      <span href="#" class="badge text-bg-dark m-1">{{ genre.name }}</span>
+                      <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge text-bg-dark m-1">{{ genre.name }}</a>
                     }
                   }
                 </div>

@@ -1,12 +1,21 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AnimeApi } from '../../services/anime-api';
 import { AnimeModel, GenreModel, MoodModel, PlatformModel} from '../../models/animeModel';
-import { ActivatedRoute } from '@angular/router';
-import { RouterLink, Router } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
+import { RouterLink } from '@angular/router';
+
+import { combineLatest, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+
+import { SlugifyPipe } from '../../pipes/slugify-pipe';
+
+import { RouteResolution } from '../../models/animeModel';
+import { MoodCollection } from '../../models/animeModel';
+import { GenreCollection } from '../../models/animeModel';
 
 @Component({
   selector: 'app-results',
-  imports: [RouterLink],
+  imports: [RouterLink, SlugifyPipe],
   templateUrl: './results.html',
   styleUrl: './results.scss',
 })
@@ -24,10 +33,11 @@ export class Results implements OnInit {
     currentPage: number = 1;
     itemsPerPage: number = 12;
 
-    // La variable qui va contenir la valeur du select 
-  selectedAnimeId: number | null = null;
-  selectedGenreId: number | null = null;
-  selectedMoodIri: string | undefined;
+      // La variable qui va contenir la valeur du select 
+    selectedAnimeId: number | null = null;
+    selectedGenreId: number | null = null;
+    selectedGenreIri: string | undefined;
+    selectedMoodIri: string | undefined;
 
     // État du chargement
     isLoading = signal<boolean>(false);
@@ -35,17 +45,58 @@ export class Results implements OnInit {
     constructor(private monApiService: AnimeApi, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-      const slug = this.route.snapshot.paramMap.get('slug');
+      let slug = this.route.snapshot.paramMap.get('slug');
 
       this.loadMoodsForFilter(slug);
       this.loadGenres();
       this.loadPlatforms();
 
-      this.route.queryParamMap.subscribe(params => {
-      this.searchTerm = params.get('search') ?? '';
-      this.currentPage = 1;
-      this.loadAnimes();
-    });
+      // Pour ne déclencher qu'un rechargement à la fois, peu importe si on modifie la mood on le filtre de recherche
+      combineLatest([
+        this.route.params,
+        this.route.queryParamMap
+      ]).pipe(
+        switchMap(([params, queryParams]) => {
+          // On met à jour les états locaux
+          this.searchTerm = queryParams.get('search') ?? '';
+          this.currentPage = 1;
+
+          const moodSlug = params['slug'];
+          const genreSlug = params['genre'];
+
+          if (moodSlug) {
+            return this.monApiService.getMoodFromSlug(moodSlug).pipe(
+              map((response): RouteResolution => ({ type: 'mood', response }))
+            );
+          } else if (genreSlug) {
+            return this.monApiService.getGenreFromSlug(genreSlug).pipe(
+              map((response): RouteResolution => ({ type: 'genre', response }))
+            );
+          } else {
+            return of<RouteResolution>({ type: 'search', response: null });
+          }
+        })
+      ).subscribe({
+        next: (data: RouteResolution) => {
+            this.selectedMoodIri = undefined;
+            this.selectedGenreIri = undefined;
+
+            if (data.type === 'mood' && data.response) {
+              const response = data.response as MoodCollection;
+              const slug = this.route.snapshot.params['slug'];
+              const selectedMood = response.member.find((mood) => mood.slug === slug);
+              this.selectedMoodIri = selectedMood?.['@id'];
+            } else if (data.type === 'genre' && data.response) {
+              const response = data.response as GenreCollection;
+              const slug = this.route.snapshot.params['genre'];
+              const selectedGenre = response.member.find((genre) => genre.slug === slug);
+              console.log(selectedGenre);
+              this.selectedGenreIri = selectedGenre?.['@id'];
+            }
+            this.loadAnimes();
+        },
+        error: (err) => console.error('Erreur récupération mood IRI', err)
+      });
     }
 
   /********************************************
@@ -90,12 +141,13 @@ export class Results implements OnInit {
       ? `/api/animes/${this.selectedAnimeId}`
       : undefined;
 
-    const genreIri = this.selectedGenreId
-      ? `/api/genres/${this.selectedGenreId}`
+    const genreIri = this.selectedGenreIri
+      ? this.selectedGenreIri
       : undefined;
 
     const moodIri = this.selectedMoodIri;
       
+    console.log(moodIri);
     this.isLoading.set(true);
     this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri, undefined, this.searchTerm).subscribe({
       next: (data) => {
@@ -118,12 +170,12 @@ export class Results implements OnInit {
     next: (data) => {
       this.moods.set(data.member);
 
-      const selectedMood = data.member.find(mood => mood.slug === slug);
+      // const selectedMood = data.member.find(mood => mood.slug === slug);
 
-      this.selectedMoodIri = selectedMood?.['@id'];
+      // this.selectedMoodIri = selectedMood?.['@id'];
 
-      this.currentPage = 1;
-      this.loadAnimes();
+      // this.currentPage = 1;
+      // this.loadAnimes();
     },
     error: (err) => console.error('Erreur chargement des moods', err)
   });

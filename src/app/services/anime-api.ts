@@ -20,7 +20,7 @@ export class AnimeApi {
 
   constructor(private http: HttpClient, private monAuthService: AnimeAuth) {}
 
-    getAnimes(page: number = 1, animeIri?: string, genreIri?: string, moodIri?: string, platformIri?: string, search?: string): Observable<AnimeCollection> {
+  getAnimes(page: number = 1, animeIri?: string, genreIri?: string, moodIri?: string, platformIri?: string, search?: string): Observable<AnimeCollection> {
     let params = new HttpParams().set('page', page);
 
     if (animeIri) {
@@ -39,6 +39,7 @@ export class AnimeApi {
     if (search) {
       params = params.set('title', search);
     }
+    console.log(params);
 
     return this.http.get<AnimeCollection>(`${this.apiUrl}animes`, { params });
   }
@@ -50,5 +51,12 @@ export class AnimeApi {
   }
   getPlatforms(): Observable<PlatformCollection> {
     return this.http.get<PlatformCollection>(`${this.apiUrl}platforms`);
+  }
+
+  getMoodFromSlug(slug: string): Observable<MoodCollection> {
+    return this.http.get<MoodCollection>(`${this.apiUrl}moods?slug=` + slug);
+  }
+  getGenreFromSlug(slug: string): Observable<GenreCollection> {
+    return this.http.get<GenreCollection>(`${this.apiUrl}genres?slug=` + slug);
   }
 }
