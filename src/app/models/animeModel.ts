@@ -16,9 +16,10 @@ export interface AnimeModel {
 
 
 export interface GenreModel {
-
+    '@id': string;
     id: number;
     name: string;  
+    slug: string;  
 }
 
 
@@ -63,4 +64,9 @@ export interface MoodCollection {
 export interface PlatformCollection {
   member: PlatformModel[];
   totalItems: number;
+}
+
+export interface RouteResolution {
+  type: 'mood' | 'genre' | 'search';
+  response: MoodCollection | GenreCollection | null;
 }

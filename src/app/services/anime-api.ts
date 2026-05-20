@@ -53,7 +53,10 @@ export class AnimeApi {
     return this.http.get<PlatformCollection>(`${this.apiUrl}platforms`);
   }
 
-  getMoodIRIFromSlug(slug: string): Observable<MoodCollection> {
+  getMoodFromSlug(slug: string): Observable<MoodCollection> {
     return this.http.get<MoodCollection>(`${this.apiUrl}moods?slug=` + slug);
+  }
+  getGenreFromSlug(slug: string): Observable<GenreCollection> {
+    return this.http.get<GenreCollection>(`${this.apiUrl}genres?slug=` + slug);
   }
 }

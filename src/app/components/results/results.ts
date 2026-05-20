@@ -1,15 +1,21 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AnimeApi } from '../../services/anime-api';
 import { AnimeModel, GenreModel, MoodModel, PlatformModel} from '../../models/animeModel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
 import { RouterLink } from '@angular/router';
 
-import { combineLatest } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+
+import { SlugifyPipe } from '../../pipes/slugify-pipe';
+
+import { RouteResolution } from '../../models/animeModel';
+import { MoodCollection } from '../../models/animeModel';
+import { GenreCollection } from '../../models/animeModel';
 
 @Component({
   selector: 'app-results',
-  imports: [RouterLink],
+  imports: [RouterLink, SlugifyPipe],
   templateUrl: './results.html',
   styleUrl: './results.scss',
 })
@@ -30,6 +36,7 @@ export class Results implements OnInit {
       // La variable qui va contenir la valeur du select 
     selectedAnimeId: number | null = null;
     selectedGenreId: number | null = null;
+    selectedGenreIri: string | undefined;
     selectedMoodIri: string | undefined;
 
     // État du chargement
@@ -54,15 +61,39 @@ export class Results implements OnInit {
           this.searchTerm = queryParams.get('search') ?? '';
           this.currentPage = 1;
 
-          // On récupère l'IRI du mood, puis on charge les animés
-          return this.monApiService.getMoodIRIFromSlug(params['slug']);
+          const moodSlug = params['slug'];
+          const genreSlug = params['genre'];
+
+          if (moodSlug) {
+            return this.monApiService.getMoodFromSlug(moodSlug).pipe(
+              map((response): RouteResolution => ({ type: 'mood', response }))
+            );
+          } else if (genreSlug) {
+            return this.monApiService.getGenreFromSlug(genreSlug).pipe(
+              map((response): RouteResolution => ({ type: 'genre', response }))
+            );
+          } else {
+            return of<RouteResolution>({ type: 'search', response: null });
+          }
         })
       ).subscribe({
-        next: (response) => {
-          const slug = this.route.snapshot.params['slug'];
-          const selectedMood = response.member.find(mood => mood.slug === slug);
-          this.selectedMoodIri = selectedMood?.['@id'];
-          this.loadAnimes();
+        next: (data: RouteResolution) => {
+            this.selectedMoodIri = undefined;
+            this.selectedGenreIri = undefined;
+
+            if (data.type === 'mood' && data.response) {
+              const response = data.response as MoodCollection;
+              const slug = this.route.snapshot.params['slug'];
+              const selectedMood = response.member.find((mood) => mood.slug === slug);
+              this.selectedMoodIri = selectedMood?.['@id'];
+            } else if (data.type === 'genre' && data.response) {
+              const response = data.response as GenreCollection;
+              const slug = this.route.snapshot.params['genre'];
+              const selectedGenre = response.member.find((genre) => genre.slug === slug);
+              console.log(selectedGenre);
+              this.selectedGenreIri = selectedGenre?.['@id'];
+            }
+            this.loadAnimes();
         },
         error: (err) => console.error('Erreur récupération mood IRI', err)
       });
@@ -110,8 +141,8 @@ export class Results implements OnInit {
       ? `/api/animes/${this.selectedAnimeId}`
       : undefined;
 
-    const genreIri = this.selectedGenreId
-      ? `/api/genres/${this.selectedGenreId}`
+    const genreIri = this.selectedGenreIri
+      ? this.selectedGenreIri
       : undefined;
 
     const moodIri = this.selectedMoodIri;
