@@ -11,8 +11,8 @@ import { DetailPage } from './pages/detail-page/detail-page';
 export const routes: Routes = [
     { path: '', component: Homepage },
     { path: 'results/:slug', component: ResultsPage },
-    { path: 'results', component: ResultsPage }
-    // { path: 'detail', component: DetailPage },
+    { path: 'results', component: ResultsPage },
+    { path: 'detail', component: DetailPage },
 ];
 
 
