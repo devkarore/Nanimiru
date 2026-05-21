@@ -8,7 +8,7 @@ export interface AnimeModel {
     thumbnailUrl: string;    
     ageRating: number;   
     type:string;
-    episode: number;
+    nbEpisodes: number;
     genres: GenreModel[];
     moods: MoodModel[];
     platforms: PlatformModel[]; 
@@ -48,18 +48,15 @@ export interface AnimeCollection {
   totalItems: number;
 }
 
-
 export interface GenreCollection {
   member: GenreModel[];
   totalItems: number;
 }
 
-
 export interface MoodCollection {
   member: MoodModel[];
   totalItems: number;
 }
-
 
 export interface PlatformCollection {
   member: PlatformModel[];

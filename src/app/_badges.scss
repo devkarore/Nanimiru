@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+.cozy{    
+    @include cozy;
+}
+.feel-good {
+    @include feel-good;
+
+}
+.emotional {
+    @include emotional;
+
+}
+.epic {
+    @include epic;
+
+}
+.dark {
+    @include dark;
+
+}
+.relaxing {
+    @include relaxing;
+
+}
+.tense {
+    @include tense;
+
+}
+.wholesome {
+    @include wholesome;
+
+}

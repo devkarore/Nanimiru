@@ -13,7 +13,7 @@ export const routes: Routes = [
     { path: 'results/:slug', component: ResultsPage },
     { path: 'results/genre/:genre', component: ResultsPage },
     { path: 'results', component: ResultsPage },
-    { path: 'detail', component: DetailPage },
+    { path: 'detail/:id', component: DetailPage },
 ];
 
 

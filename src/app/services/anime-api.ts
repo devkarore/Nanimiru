@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AnimeCollection } from '../models/animeModel';
+import { AnimeCollection, AnimeModel } from '../models/animeModel';
 import { GenreCollection } from '../models/animeModel';
 import { MoodCollection } from '../models/animeModel';
 import { PlatformCollection } from '../models/animeModel';
@@ -59,4 +59,7 @@ export class AnimeApi {
   getGenreFromSlug(slug: string): Observable<GenreCollection> {
     return this.http.get<GenreCollection>(`${this.apiUrl}genres?slug=` + slug);
   }
+  getAnimeById(id: number): Observable<AnimeModel> {
+  return this.http.get<AnimeModel>(`${this.apiUrl}animes/${id}`);
+}
 }

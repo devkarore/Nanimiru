@@ -1,28 +1,128 @@
-<div class="container">
+
+@if (anime(); as anime) {
+  <div class="detail-page py-5">
+    <div class="container">
+      <a routerLink="/results" class="btn btn-outline-dark btn-sm mb-4">
+        Retour
+      </a>
+
+      <div class="detail-card position-relative shadow-lg rounded-4 overflow-hidden border border-2">
+        <div class="row g-0">
+          <div class="col-12 col-lg-4">
+            <div class="detail-poster">
+              <img
+                [src]="anime.thumbnailUrl"
+                [alt]="anime.title"
+                class="img-fluid w-100 h-100 object-fit-cover"
+              />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <div class="p-4 p-lg-5">
+              <div class="d-flex flex-column h-100">
+                <div class="mb-4">
+                  <p class="detail-kicker mb-2">Anime details</p>
+
+                  <h1 class="display-5 fw-bold mb-3 text-purple">
+                    {{ anime.title }}
+                  </h1>
+
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge rounded-pill meta-badge px-3 py-2">{{ anime.year }}</span>
+                    <span class="badge rounded-pill meta-badge px-3 py-2">{{ anime.type }}</span>
+                    @if (anime.type !== 'Film') {
+                      <span class="badge rounded-pill meta-badge px-3 py-2">{{ anime.nbEpisodes }} episodes</span>
+                    }
+                    <span class="badge rounded-pill meta-badge px-3 py-2">{{ anime.ageRating }}+</span>
+                  </div>
+                </div>
+
+                <div class="synopsis-box mb-4 p-4 rounded-4">
+                  <h2 class="section-title h5 fw-bold mb-3">Synopsis</h2>
+                  <p class="mb-0 text-secondary">
+                    {{ anime.synopsis }}
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <h3 class="section-title small text-uppercase fw-bold mb-3">Genres</h3>
+                  <div class="d-flex flex-wrap gap-2">
+                    @for (genre of anime.genres; track genre.id) {
+                      <span class="badge rounded-pill text-bg-secondary px-3 py-2 shadow-sm">
+                        {{ genre.name }}
+                      </span>
+                    }
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h3 class="section-title small text-uppercase fw-bold mb-3">Moods</h3>
+                  <div class="d-flex flex-wrap gap-2">
+                    @for (mood of anime.moods; track mood.id) {
+                      <a [routerLink]="['/results', mood.slug]" class="badge rounded-pill px-3 py-2 text-decoration-none shadow-sm" [ngClass]="mood.slug | moodBadgeClass">
+                        {{ mood.label }}
+                      </a>
+                    }
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="section-title small text-uppercase fw-bold mb-3">Disponible sur</h3>
+                  <div class="d-flex flex-wrap gap-2">
+                    @for (platform of anime.platforms; track platform.id) {
+                      <div class="d-inline-flex align-items-center gap-2 px-2 py-1 badge rounded-pill text-secondary-emphasis border shadow-sm">
+                        <img
+                          [src]="platform.iconUrl"
+                          [alt]="platform.name"
+                          class="platform-icon rounded-circle"
+                        />
+                        <span>{{ platform.name }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-backdrop"></div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- <div class="container">
     <div class="border-2 bg-white rounded-5">
         <div class="row p-5">
             <div class="col-12 col-md-6 w-25">
-
-                <img class="w-100" src="https://placehold.co/600x800" alt="">
+                <img class="w-100" [src]="anime()?.thumbnailUrl" [alt]="anime()?.title"/>
             </div>
             <div class="col-12 col-md-6">
-                @for (anime of animes(); track anime.id) {
+                @if (anime(); as anime) {
                     <div class="position-relative">                    
-                            <h1>{{ anime.title }}</h1>                    
-                            <p>{{ anime.synopsis }}</p>
-                            <p>Age: {{ anime.ageRating }}</p>
+                        <h2>{{ anime.title }}</h2>                   
+                        <p>{{ anime.synopsis }}</p>
+                        <p>Age: {{ anime.ageRating }}</p>
                         <div class="position-absolute top-0 end-0">
                             <p class="">{{anime.year}}</p>
-                            <p>{{anime.genres}}</p>
+                            @for (genre of anime.genres; track genre.id) {
+                                <span>{{ genre.name }}</span>
+                            }
                             <br>
-                            <p>{{anime.moods}}</p>
+                            @for (mood of anime.moods; track mood.id) {
+                                <span>{{ mood.label }}</span>
+                            }
                             <br>
-                            <p>{{anime.platforms}}</p>
+                            @for (platform of anime.platforms; track platform.id) {
+                                <span>{{ platform.name }}</span>
+                            }
                         </div>
-                    </div>
-                    }
-                
+                    </div>                
+                }
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<!-- <img class="w-100" src="https://placehold.co/600x800" alt=""> -->

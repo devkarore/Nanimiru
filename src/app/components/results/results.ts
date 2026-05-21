@@ -12,10 +12,12 @@ import { SlugifyPipe } from '../../pipes/slugify-pipe';
 import { RouteResolution } from '../../models/animeModel';
 import { MoodCollection } from '../../models/animeModel';
 import { GenreCollection } from '../../models/animeModel';
+import { MoodBadgeClassPipe } from '../../pipes/mood-badge-class-pipe';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-results',
-  imports: [RouterLink, SlugifyPipe],
+  imports: [RouterLink, SlugifyPipe, MoodBadgeClassPipe, NgClass],
   templateUrl: './results.html',
   styleUrl: './results.scss',
 })
@@ -152,8 +154,8 @@ export class Results implements OnInit {
     this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri, undefined, this.searchTerm).subscribe({
       next: (data) => {
         this.animes.set(data.member.filter(anime =>
-        anime.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      ));
+          anime.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ));
         this.totalItems = data.totalItems;
         this.isLoading.set(false);
       },
