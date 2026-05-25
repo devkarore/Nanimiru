@@ -4,10 +4,11 @@ import { AnimeModel} from '../../models/animeModel';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MoodBadgeClassPipe } from '../../pipes/mood-badge-class-pipe';
 import { NgClass } from '@angular/common';
+import { SlugifyPipe } from '../../pipes/slugify-pipe';
 
 @Component({
   selector: 'app-detail-page',
-  imports: [RouterLink, MoodBadgeClassPipe, NgClass],
+  imports: [RouterLink, MoodBadgeClassPipe, NgClass, SlugifyPipe],
   templateUrl: './detail-page.html',
   styleUrl: './detail-page.scss',
 })

@@ -12,9 +12,18 @@
                </a>
               <!-- bandeau transparant sur l'image > licences -->
               <div class="position-absolute bottom-0 start-0 w-100 d-flex align-items-center justify-content-center gap-2 px-2 image-overlay">
-                @for (platform of anime.platforms; track platform.id) {                
-                  <span>{{ platform.name }}</span>
-                  <img class="rounded-circle platform-icon" [src]="platform.iconUrl" [alt]="platform.name" />                
+                @for (platform of anime.platforms; track platform.id) {
+                  <a
+                    [routerLink]="['/results/platform', platform.name | slugify]"
+                    class="d-inline-flex align-items-center gap-1 text-white text-decoration-none"
+                  >
+                    <span>{{ platform.name }}</span>
+                    <img
+                      class="rounded-circle platform-icon"
+                      [src]="platform.iconUrl"
+                      [alt]="platform.name"
+                    />
+                  </a>
                 }
               </div>
             </div>

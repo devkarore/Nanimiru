@@ -66,3 +66,50 @@
     min-height: 360px;
   }
 }
+
+.btn-outline-dark:hover {
+  background: $Purple;
+  color: white;
+  border-color: $Purple;
+}
+.btn-outline-dark {
+  background: transparent;
+  color: $Purple;
+  border-color: $Purple;
+}
+
+.platform-crunchyroll {
+  background: #f47521;
+  color: white;
+  border: none;
+}
+
+.platform-netflix {
+  background: #e50914;
+  color: white;
+  border: none;
+}
+
+.platform-adn {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+}
+
+.platform-prime-video {
+  background: #00a8e1;
+  color: white;
+  border: none;
+}
+
+.platform-disney {
+  background: #113ccf;
+  color: white;
+  border: none;
+}
+
+.platform-default {
+  background: #e9ecef;
+  color: #212529;
+  border: 1px solid #ced4da;
+}

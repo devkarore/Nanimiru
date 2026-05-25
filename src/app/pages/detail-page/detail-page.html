@@ -45,17 +45,7 @@
                   </p>
                 </div>
 
-                <div class="mb-4">
-                  <h3 class="section-title small text-uppercase fw-bold mb-3">Genres</h3>
-                  <div class="d-flex flex-wrap gap-2">
-                    @for (genre of anime.genres; track genre.id) {
-                      <span class="badge rounded-pill text-bg-secondary px-3 py-2 shadow-sm">
-                        {{ genre.name }}
-                      </span>
-                    }
-                  </div>
-                </div>
-
+                
                 <div class="mb-4">
                   <h3 class="section-title small text-uppercase fw-bold mb-3">Moods</h3>
                   <div class="d-flex flex-wrap gap-2">
@@ -66,19 +56,48 @@
                     }
                   </div>
                 </div>
+                
+                <div class="mb-4">
+                  <h3 class="section-title small text-uppercase fw-bold mb-3">Genres</h3>
+                  <div class="d-flex flex-wrap gap-2">
+                    @for (genre of anime.genres; track genre.id) {
+                    @if (genre.name === 'Fantasy') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-primary m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Action') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-secondary m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Romance') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-success m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Slice of Life') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-danger m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Comedy') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-warning m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Adventure') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-info m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'Drama') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-light border border-black m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    @if (genre.name === 'School') {
+                        <a [routerLink]="['/results/genre', genre.name | slugify]" class="badge rounded-pill px-3 py-2 text-bg-dark m-1 text-decoration-none">{{ genre.name }}</a>
+                      }
+                    }
+                  </div>
+                </div>
+
 
                 <div>
                   <h3 class="section-title small text-uppercase fw-bold mb-3">Disponible sur</h3>
                   <div class="d-flex flex-wrap gap-2">
                     @for (platform of anime.platforms; track platform.id) {
-                      <div class="d-inline-flex align-items-center gap-2 px-2 py-1 badge rounded-pill text-secondary-emphasis border shadow-sm">
-                        <img
-                          [src]="platform.iconUrl"
-                          [alt]="platform.name"
-                          class="platform-icon rounded-circle"
-                        />
+                      <a [routerLink]="['/results/platform', platform.name | slugify]" class="d-inline-flex align-items-center gap-2 px-2 py-1 badge rounded-pill text-secondary-emphasis border shadow-sm text-decoration-none" >
+                        <img [src]="platform.iconUrl" [alt]="platform.name" class="platform-icon rounded-circle" />
                         <span>{{ platform.name }}</span>
-                      </div>
+                      </a>
                     }
                   </div>
                 </div>

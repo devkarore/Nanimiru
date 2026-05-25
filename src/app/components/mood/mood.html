@@ -2,125 +2,24 @@
     <div class="container px-3">
         <h2 class="fs-1 pt-5 pb-3">Mood</h2>
     </div>
-    <swiper-container 
-        class="carousel"
-        slides-per-view="3"
-        loop="true"
-        pagination="true"
-        navigation="false"
-        pagination-clickable="true"
-        [breakpoints]="breakpoints">
+        <swiper-container class="carousel" slides-per-view="3" loop="true"
+        pagination="true" navigation="false" pagination-clickable="true" [breakpoints]="breakpoints">
         @for (mood of moods(); track mood.id) {
             <swiper-slide class="swiper-slide">
-                <div>
-                    <a
-                        [routerLink]="['/results', mood.slug]"
-                        class="card Regular shadow"            
-                        [class]="getMoodCardClass(mood)"
-                        style="width: 18rem;" >
-                        <div class="mood-tooltip">{{ mood.description }}</div>
-                        <div class="card-body text-center">
-                            <img [src]="mood.imageUrl" class="card-img-top" [alt]="mood.label">
-                            <span class="btn btn-primary rounded-pill btn-lg">
-                                {{ mood.label }}
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </swiper-slide>
-        }
-    </swiper-container>
-
-        
-    <!-- <swiper-container 
-
-    class="carousel"
-    slides-per-view="3"
-    loop="true"
-    pagination="true"
-    navigation="false"
-    pagination-clickable="true"
-    [breakpoints]="breakpoints"
-    >
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'cozy']" class="card Regular shadow cozy" style="width: 18rem;">
-                    <img src="/assets/images/cozy.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">                      
-                        <span class="btn btn-primary rounded-pill btn-lg">{{ moods.label}}</span>
+                    <div>
+                        <a [routerLink]="['/results', mood.slug]" class="card Regular shadow" [class]="getMoodCardClass(mood)">
+                            <div class="mood-tooltip">
+                                {{ mood.description }}
+                            </div>
+                            <div class="card-body text-center">
+                                <img [src]="mood.imageUrl" class="card-img-top" [alt]="mood.label">
+                                <span class="btn btn-primary rounded-pill btn-lg">
+                                    {{ mood.label }}
+                                </span>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'feel-good']" class="card Regular shadow feelGood" style="width: 18rem;">
-                    <img src="/assets/images/feelGood.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Feel Good</span>
-                    </div>
-                </a>
-                </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'wholesome']" class="card Regular shadow wholesome" style="width: 18rem;">
-                    <img src="/assets/images/wholesome.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Wholesome</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'emotional']" class="card Regular shadow emotional" style="width: 18rem;">
-                    <img src="/assets/images/emotional.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Emotional</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'dark']" class="card Regular shadow dark" style="width: 18rem;">
-                    <img src="/assets/images/dark.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Dark</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'epic']" class="card Regular shadow epic" style="width: 18rem;">
-                    <img src="/assets/images/epic.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Epic</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'relaxing']" class="card Regular shadow relaxing" style="width: 18rem;">
-                    <img src="/assets/images/relaxing.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Relaxing</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide">
-            <div>
-                <a [routerLink]="['/results', 'tense']" class="card Regular shadow tense" style="width: 18rem;">
-                    <img src="/assets/images/tense.png" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <span class="btn btn-primary rounded-pill btn-lg">Tense</span>
-                    </div>
-                </a>
-            </div>
-        </swiper-slide>
-    </swiper-container> -->
+                </swiper-slide>
+            }
+        </swiper-container>
 </div>

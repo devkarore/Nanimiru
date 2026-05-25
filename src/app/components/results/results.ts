@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AnimeApi } from '../../services/anime-api';
-import { AnimeModel, GenreModel, MoodModel, PlatformModel} from '../../models/animeModel';
-import { ActivatedRoute, Route } from '@angular/router';
+import { AnimeModel, GenreModel, MoodModel, PlatformCollection, PlatformModel} from '../../models/animeModel';
+import { ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
 
 import { combineLatest, of } from 'rxjs';
@@ -33,13 +33,16 @@ export class Results implements OnInit {
       // Les variables qui vont nous aider à paginer
     totalItems: number = 0;
     currentPage: number = 1;
-    itemsPerPage: number = 12;
+    itemsPerPage: number = 8;
 
       // La variable qui va contenir la valeur du select 
     selectedAnimeId: number | null = null;
     selectedGenreId: number | null = null;
     selectedGenreIri: string | undefined;
     selectedMoodIri: string | undefined;
+    selectedPlatformIri: string | undefined;
+      private slugifyPipe = new SlugifyPipe();
+    
 
     // État du chargement
     isLoading = signal<boolean>(false);
@@ -65,6 +68,7 @@ export class Results implements OnInit {
 
           const moodSlug = params['slug'];
           const genreSlug = params['genre'];
+          const platformSlug = params['platform'];
 
           if (moodSlug) {
             return this.monApiService.getMoodFromSlug(moodSlug).pipe(
@@ -74,6 +78,10 @@ export class Results implements OnInit {
             return this.monApiService.getGenreFromSlug(genreSlug).pipe(
               map((response): RouteResolution => ({ type: 'genre', response }))
             );
+          } else if (platformSlug) {
+            return this.monApiService.getPlatformFromSlug(platformSlug).pipe(
+              map((response): RouteResolution => ({ type: 'platform', response }))
+            );
           } else {
             return of<RouteResolution>({ type: 'search', response: null });
           }
@@ -82,7 +90,7 @@ export class Results implements OnInit {
         next: (data: RouteResolution) => {
             this.selectedMoodIri = undefined;
             this.selectedGenreIri = undefined;
-
+            this.selectedPlatformIri = undefined;
             if (data.type === 'mood' && data.response) {
               const response = data.response as MoodCollection;
               const slug = this.route.snapshot.params['slug'];
@@ -94,6 +102,15 @@ export class Results implements OnInit {
               const selectedGenre = response.member.find((genre) => genre.slug === slug);
               console.log(selectedGenre);
               this.selectedGenreIri = selectedGenre?.['@id'];
+            } else if (data.type === 'platform' && data.response) {
+              const response = data.response as PlatformCollection;
+              const slug = this.route.snapshot.params['platform'];
+
+              const selectedPlatform = response.member.find(
+                (platform) => this.slugifyPipe.transform(platform.name) === slug
+              );
+
+              this.selectedPlatformIri = selectedPlatform?.['@id'];
             }
             this.loadAnimes();
         },
@@ -148,10 +165,12 @@ export class Results implements OnInit {
       : undefined;
 
     const moodIri = this.selectedMoodIri;
+    const platformIri = this.selectedPlatformIri;
+    
       
     console.log(moodIri);
     this.isLoading.set(true);
-    this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri, undefined, this.searchTerm).subscribe({
+    this.monApiService.getAnimes(this.currentPage, animeIri, genreIri, moodIri, platformIri, this.searchTerm).subscribe({
       next: (data) => {
         this.animes.set(data.member.filter(anime =>
           anime.title.toLowerCase().includes(this.searchTerm.toLowerCase())

@@ -32,16 +32,19 @@ export class Mood implements OnInit {
     });
   }
     breakpoints = {
-    0: {
-      slidesPerView: 1
-    },
-    768: {
-      slidesPerView: 2
-    },
-    1024: {
-      slidesPerView: 3
-    }
-  };
+  0: {
+    slidesPerView: 1,
+    spaceBetween: 12
+  },
+  768: {
+    slidesPerView: 2,
+    spaceBetween: 16
+  },
+  1024: {
+    slidesPerView: 3,
+    spaceBetween: 20
+  }
+};
   getMoodCardClass(mood: MoodModel): string {
     return `card Regular shadow ${mood.slug}`;
   }

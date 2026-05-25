@@ -14,6 +14,7 @@ export const routes: Routes = [
     { path: 'results/genre/:genre', component: ResultsPage },
     { path: 'results', component: ResultsPage },
     { path: 'detail/:id', component: DetailPage },
+    { path: 'results/platform/:platform', component: ResultsPage },
 ];
 
 

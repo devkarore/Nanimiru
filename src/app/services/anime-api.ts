@@ -60,6 +60,9 @@ export class AnimeApi {
     return this.http.get<GenreCollection>(`${this.apiUrl}genres?slug=` + slug);
   }
   getAnimeById(id: number): Observable<AnimeModel> {
-  return this.http.get<AnimeModel>(`${this.apiUrl}animes/${id}`);
-}
+    return this.http.get<AnimeModel>(`${this.apiUrl}animes/${id}`);
+  }
+  getPlatformFromSlug(slug: string): Observable<PlatformCollection> {
+    return this.http.get<PlatformCollection>(`${this.apiUrl}platforms?slug=` + slug);
+  }
 }

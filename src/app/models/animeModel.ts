@@ -35,11 +35,12 @@ export interface MoodModel {
 
 
 export interface PlatformModel {
-
+    '@id': string;
     id: number;
     name: string;
     iconUrl: string;
-    imageUrl: string;      
+    imageUrl: string;    
+    // slug: string;  
 }
 
 
@@ -64,6 +65,6 @@ export interface PlatformCollection {
 }
 
 export interface RouteResolution {
-  type: 'mood' | 'genre' | 'search';
-  response: MoodCollection | GenreCollection | null;
+  type: 'mood' | 'genre' | 'search' | 'platform';
+  response: MoodCollection | GenreCollection | PlatformCollection | null;
 }
