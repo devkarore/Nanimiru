@@ -2,13 +2,13 @@ import { Component, signal, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core
 import { AnimeApi } from '../../services/anime-api';
 import { RouterLink } from '@angular/router';
 import { MoodModel } from '../../models/animeModel';
-import { NgClass } from '@angular/common';
+
 
 
 
 @Component({
   selector: 'app-mood',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './mood.html',
   styleUrl: './mood.scss',

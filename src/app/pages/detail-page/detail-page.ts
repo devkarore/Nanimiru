@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AnimeApi } from '../../services/anime-api';
 import { AnimeModel} from '../../models/animeModel';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { MoodBadgeClassPipe } from '../../pipes/mood-badge-class-pipe';
-import { NgClass } from '@angular/common';
+import { NgClass, Location } from '@angular/common';
 import { SlugifyPipe } from '../../pipes/slugify-pipe';
 
 @Component({
@@ -16,7 +16,7 @@ export class DetailPage implements OnInit{
 
   anime = signal<AnimeModel | null>(null);
   
-  constructor(private monApiService: AnimeApi, private route: ActivatedRoute) {}
+  constructor(private monApiService: AnimeApi, private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -27,6 +27,14 @@ export class DetailPage implements OnInit{
       next: (data) => this.anime.set(data),
       error: (err) => console.error('Erreur chargement anime', err)
     });
+  }
+  
+  goBack(): void {
+    if (window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
     
 }

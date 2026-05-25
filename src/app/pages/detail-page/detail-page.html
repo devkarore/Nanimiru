@@ -2,9 +2,9 @@
 @if (anime(); as anime) {
   <div class="detail-page py-5">
     <div class="container">
-      <a routerLink="/results" class="btn btn-outline-dark btn-sm mb-4">
+      <button type="button" (click)="goBack()" class="btn btn-outline-dark btn-sm mb-4">
         Retour
-      </a>
+      </button>
 
       <div class="detail-card position-relative shadow-lg rounded-4 overflow-hidden border border-2">
         <div class="row g-0">

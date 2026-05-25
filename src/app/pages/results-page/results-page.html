@@ -2,6 +2,12 @@
 <div class="blocResults">
   <div class="container">
     <h2 class="fs-1 pb-3">Résultats</h2>  
+    @if (activeFilterValue) {
+      <p class="results-context mb-4">
+        <span class="results-context-label">{{ activeFilterType }} :</span>
+        <span class="results-context-value">{{ activeFilterValue }}</span>
+      </p>
+    }
   </div>
 </div>
 <app-results></app-results>

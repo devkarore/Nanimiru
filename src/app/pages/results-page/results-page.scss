@@ -7,4 +7,25 @@
         color: $Purple;
         font-family: 'FredokaOne', sans-serif;
     }
+    .results-context {
+        font-family: $textPolice, sans-serif;
+        margin-top: -0.5rem;
+    }
+
+    .results-context-label {
+        color: $Purple;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-right: 0.4rem;
+    }
+
+    .results-context-value {
+        color: $Purple;
+        font-family: 'FredokaOne', sans-serif;
+        font-size: 1.15rem;
+        text-decoration: underline;
+        text-decoration-color: $bg;
+        text-decoration-thickness: 0.2rem;
+        text-underline-offset: 0.2rem;
+    }
 }
