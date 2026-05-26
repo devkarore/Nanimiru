@@ -15,7 +15,7 @@ export class ResultsPage implements OnInit {
   activeFilterValue: string = '';
 
   moodLabels: Record<string, string> = {
-    cozy: 'Réconfortant',
+    cozy: 'Cosy',
     'feel-good': 'Feel good',
     emotional: 'Émouvant',
     epic: 'Épique',

@@ -16,7 +16,7 @@ export class AnimeAuth {
       }
     ).pipe(
       tap(response => {
-        console.log('JWT reçu :', response.token);
+        // console.log('JWT reçu :', response.token);
         localStorage.setItem('api_jwt', response.token);
       })
     );
